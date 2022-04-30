@@ -4,10 +4,17 @@ on: [push]
 
 jobs:
   action:
-    name: Clone repo
+    name: Build KubOS image
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout
+        uses: actions/checkout@v3
         with:
           ref: 'buildroot-2022-02'
+
+      - name: echo stuff
+        run: |
+          ls
+          git status
+        shell: 'bash'
