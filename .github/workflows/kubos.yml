@@ -1,0 +1,12 @@
+name: KubOS Build
+
+on: [push]
+
+jobs:
+  action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'buildroot-2022-02'
