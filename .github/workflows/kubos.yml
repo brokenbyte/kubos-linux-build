@@ -39,8 +39,8 @@ jobs:
         working-directory: ../buildroot-2022.02.1
         run: tar czf images.tgz ./output/images
 
-      - name: checkout
+      - name: upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: buildroot-output
-          path: "./images.tgz"
+          path: "../buildroot-2022.02.1/images.tgz"
