@@ -30,6 +30,17 @@ jobs:
         working-directory: ../buildroot-2022.02.1
         run: |
           make BR2_EXTERNAL=../kubos-linux-build/ beaglebone-black_defconfig
+
       - name: build buildroot
         working-directory: ../buildroot-2022.02.1
         run: make
+
+      - name: save images
+        working-directory: ../buildroot-2022.02.1
+        run: tar czf images.tgz ./output/images
+
+      - name: checkout
+        uses: actions/upload-artifact@v2
+        with:
+          name: buildroot-output
+          path: "./images.tgz"
