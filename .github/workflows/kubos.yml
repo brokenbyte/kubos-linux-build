@@ -21,7 +21,7 @@ jobs:
 
       - name: download buildroot
         run: |
-          wget https://buildroot.org/downloads/buildroot-2022.02.1.tar.gz -o ../buildroot.tgz
+          wget https://buildroot.org/downloads/buildroot-2022.02.1.tar.gz -P ../
           cd ..
           tar xzf buildroot.tgz
           ls
