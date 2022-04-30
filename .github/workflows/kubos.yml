@@ -20,7 +20,13 @@ jobs:
         shell: 'bash'
 
       - name: download buildroot
+        working-directory: ../
         run: |
-          wget https://buildroot.org/downloads/buildroot-2022.02.1.tar.gz -P ../
-          cd .. && tar xzf buildroot.tgz && ls
-          pwd
+          wget https://buildroot.org/downloads/buildroot-2022.02.1.tar.gz
+          tar xzf buildroot-2022.02.1.tar.gz
+          ls
+
+      - name: configure buildroot
+        working-directory: ../buildroot-2022.02.1
+        run: |
+          make BR2_EXTERNAL=../kubos-linux-build/ beaglebone-black_defconfig
