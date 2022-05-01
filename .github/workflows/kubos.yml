@@ -37,10 +37,10 @@ jobs:
 
       - name: save images
         working-directory: ../buildroot-2022.02.1
-        run: tar czf images.tgz ./output/images
+        run: tar czf ../kubos-linux-build/images.tgz ./output/images
 
       - name: upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: buildroot-output
-          path: "../buildroot-2022.02.1/images.tgz"
+          path: "images.tgz"
