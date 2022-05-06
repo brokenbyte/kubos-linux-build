@@ -36,13 +36,13 @@ jobs:
         working-directory: ../buildroot-2022.02.1
         run: tar czf ../kubos-linux-build/images.tgz ./output/images
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: buildroot-output
-          path: "images.tgz"
+      #- name: Upload artifacts
+        #uses: actions/upload-artifact@v3
+        #with:
+          #name: buildroot-output
+          #path: "images.tgz"
 
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "buildroot-output"
+          artifacts: "images.tgz"
           token: ${{ secrets.GITHUB_TOKEN }}
