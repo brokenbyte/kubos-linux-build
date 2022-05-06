@@ -1,6 +1,9 @@
 name: KubOS Build
 
-on: [push]
+on:
+  push:
+    tags:
+    - '*'
 
 jobs:
   action:
@@ -8,39 +11,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout
+      - name: Checkout repo
         uses: actions/checkout@v3
         with:
           ref: 'buildroot-2022-02'
 
-      - name: echo stuff
-        run: |
-          ls
-          git status
-        shell: 'bash'
-
-      - name: download buildroot
+      - name: Download buildroot
         working-directory: ../
         run: |
           wget https://buildroot.org/downloads/buildroot-2022.02.1.tar.gz
           tar xzf buildroot-2022.02.1.tar.gz
-          ls
 
-      - name: configure buildroot
+      - name: Configure buildroot
         working-directory: ../buildroot-2022.02.1
-        run: |
-          make BR2_EXTERNAL=../kubos-linux-build/ beaglebone-black_defconfig
+        run: make BR2_EXTERNAL=../kubos-linux-build/ beaglebone-black_defconfig
 
-      - name: build buildroot
+      - name: Build buildroot
         working-directory: ../buildroot-2022.02.1
         run: make
 
-      - name: save images
+      - name: Save images
         working-directory: ../buildroot-2022.02.1
         run: tar czf ../kubos-linux-build/images.tgz ./output/images
 
-      - name: upload artifacts
-        uses: actions/upload-artifact@v3
+      - uses: ncipollo/release-action@v1
         with:
-          name: buildroot-output
-          path: "images.tgz"
+          artifacts: "../buildroot-2022.02.1/output/images"
+          token: ${{ secrets.GITHUB_TOKEN }}
