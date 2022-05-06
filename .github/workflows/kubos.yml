@@ -9,6 +9,8 @@ jobs:
   action:
     name: Build KubOS image
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repo
