@@ -36,5 +36,5 @@ jobs:
 
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "../buildroot-2022.02.1/output/images"
+          artifacts: "images.tgz"
           token: ${{ secrets.GITHUB_TOKEN }}
